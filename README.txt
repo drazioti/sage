@@ -1,4 +1,4 @@
-AUTH    Sage: Open Source Mathematical Software
+    Sage: Open Source Mathematical Software
 
        "Creating a Viable Open Source Alternative to
           Magma, Maple, Mathematica, and MATLAB"
