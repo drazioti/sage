@@ -1,0 +1,3 @@
+usage : ./babai <matrix> <target vector>
+where matrix =[[a,..,b],[c,..,d],...,[e,...,f]]
+and vector [a,...,b]
