@@ -1,0 +1,2 @@
+usage : ./babai_2 matrix, where matrix is a txt file which contains a matrix given in the form [[...],...,[...]] then leave a blank line and give the target 
+vector in the form [....]
