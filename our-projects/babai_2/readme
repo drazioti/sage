@@ -1,4 +1,4 @@
-usage ./babai_3 x foo
+usage $./babai_3 x foo
 where x is equal to 0 or 1.
 If x=1, then foo=[[...],..,[....]]:matrix [....]:target vector
 If x=1, then foo is a txt file which contains a matrix and the target vector as previous, but there is a blank line between them
