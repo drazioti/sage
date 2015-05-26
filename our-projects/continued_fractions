@@ -8,10 +8,13 @@
 
 
  TESTS: conf(22,23)
-       [0,1,22]
+        [0,1,22]
+        
+        conv(22,23)
+        [0,1,22/23]
 
 
- REFERENCES:
+ REFERENCES: The joy of factoring, S.S.Wagstaff, Jr. AMS
  
 """
 
@@ -44,7 +47,6 @@ def conf(a,b):
     x=x-q
     while(x>0):
         q1.append(int(floor(Rational(1,x))))
-        #x=Rational(1,x)-Rational(q1[i+1],1)
         x=1/x-q1[i+1]
         i=i+1
     return q1
