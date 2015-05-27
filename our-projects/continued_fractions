@@ -30,12 +30,10 @@
 
 
 import math
+import mpmath
 from sympy.mpmath import *
 from sympy import Rational
-import math
-from sympy import Rational
 from mpmath import *
-import mpmath
 from mpmath import mp
 mp.dps=800;
 def conf(a,b):
