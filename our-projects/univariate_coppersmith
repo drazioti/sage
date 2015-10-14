@@ -1,0 +1,78 @@
+"""
+Univariate Coppersmith method
+ AUTHORS: K.A.Draziotis
+ 
+    Copyright (C) 2015   K.A.Draziotis
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+"""
+
+####################### start initialization ##################
+def univ_cop(f,N,epsilon):
+    
+#### define your polynomial not a symnbolic expression
+    R.<x> = QQ[]
+    d=f.degree()
+    #print "degree of the polynomial, d=",d
+    h=ceil(1/(d*epsilon)) # relation (21.3) of Galbraith's book
+    print('h='),h
+    if h.is_one():
+        print "choose new values for epsilon"
+####################### end initialization  #################
+
+####################### computation of X #################
+    X=ceil(0.5*N^(1/d-epsilon))
+# Coppersmith's theorem provide us with X<=1/2*N^{1/d-epsilon}
+########################
+
+###################### 
+    print 'X=',X
+### n=rank of the lattice
+    n=d*h
+    print "rank of lattice, n=",n
+###
+
+######################### construction of the lattice ##############
+### Galbraith in the specific example consider the follwoin rows 
+### G_{0,0},G_{1,0},G_{2,0}=G_{d-1,0},
+### G_{0,1}=M^{h-2}F=MF(xX),G_{1,1}=MxF(xX),G_{2,1}=Mx^2F(xX),G_{0,2}=F(xX)^2
+### so the ordering of the rows is according to the total degree
+### The construction is as follows :
+### First you construct Row[1]=(1,x,...,x^{d-1}) :this is your first row (we've set j=0,i=0,..,d-1)
+### Then you take Row[j]=y^{j}Row1 for j=1,...,h-1
+### In the specific example Galbraith ommits some rows
+
+    L1=[N^(h-1-j)*(X*x)^i*f(x*X)^j for j in range(0,h) for i in range(0,d)]; # every element corresponds to a row of our lattice
+
+### in order to see the shape of L1 instead of f consider a variable y, i.e. var('y') and then f<--y and set         X=var('X')
+### So now we need a map from polynomials to vectors f-->b_{f}
+### Also, we shall need the inverse map. That is
+### when we compute LLL basis, we shall need the correspoding polynomial
+######################### the map ###########################
+    def map_g(f,n):
+        j=0
+        M=vector(ZZ,n)
+        if f.degree()>=n:
+            return "the degree of f must be smaller"
+        for i in f.exponents():
+            M[i]=f.coefficients()[j]
+            j=j+1
+        return M 
+##############################################################
+    M=matrix(n,n,[(map_g(L1[i],n)) for i in range(n)])
+    ML=M.LLL()
+########
+    g=sum(ML[0][i]*x^i/X^i for i in range(n))    
+    return g.roots(multiplicities=False)  
