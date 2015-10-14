@@ -45,18 +45,9 @@ def univ_cop(f,N,epsilon):
 ###
 
 ######################### construction of the lattice ##############
-### Galbraith in the specific example consider the follwoin rows 
-### G_{0,0},G_{1,0},G_{2,0}=G_{d-1,0},
-### G_{0,1}=M^{h-2}F=MF(xX),G_{1,1}=MxF(xX),G_{2,1}=Mx^2F(xX),G_{0,2}=F(xX)^2
-### so the ordering of the rows is according to the total degree
-### The construction is as follows :
-### First you construct Row[1]=(1,x,...,x^{d-1}) :this is your first row (we've set j=0,i=0,..,d-1)
-### Then you take Row[j]=y^{j}Row1 for j=1,...,h-1
-### In the specific example Galbraith ommits some rows
 
     L1=[N^(h-1-j)*(X*x)^i*f(x*X)^j for j in range(0,h) for i in range(0,d)]; # every element corresponds to a row of our lattice
 
-### in order to see the shape of L1 instead of f consider a variable y, i.e. var('y') and then f<--y and set         X=var('X')
 ### So now we need a map from polynomials to vectors f-->b_{f}
 ### Also, we shall need the inverse map. That is
 ### when we compute LLL basis, we shall need the correspoding polynomial
