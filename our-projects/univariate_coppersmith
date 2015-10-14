@@ -25,10 +25,10 @@ def univ_cop(f,N,epsilon):
     R.<x> = QQ[]
     d=f.degree()
     #print "degree of the polynomial, d=",d
-    h=ceil(1/(d*epsilon)) # relation (21.3) of Galbraith's book
+    h=ceil(1/(d*epsilon)) # this is relation (21.3) of Galbraith's book
     print('h='),h
     if h.is_one():
-        print "choose new values for epsilon"
+        print "choose a new value for epsilon"
 
 ################### computation of the bound X which laso depends on epsilon #################
     X=ceil(0.5*N^(1/d-epsilon))
