@@ -19,7 +19,6 @@ Univariate Coppersmith method
 
 """
 
-####################### start initialization ##################
 def univ_cop(f,N,epsilon):
     
 #### define your polynomial not a symnbolic expression
@@ -30,28 +29,27 @@ def univ_cop(f,N,epsilon):
     print('h='),h
     if h.is_one():
         print "choose new values for epsilon"
-####################### end initialization  #################
 
-####################### computation of X #################
+################### computation of the bound X which laso depends on epsilon #################
     X=ceil(0.5*N^(1/d-epsilon))
 # Coppersmith's theorem provide us with X<=1/2*N^{1/d-epsilon}
-########################
+###################
 
-###################### 
+###################
     print 'X=',X
 ### n=rank of the lattice
     n=d*h
     print "rank of lattice, n=",n
-###
 
-######################### construction of the lattice ##############
+
+################### construction of the lattice ##############
 
     L1=[N^(h-1-j)*(X*x)^i*f(x*X)^j for j in range(0,h) for i in range(0,d)]; # every element corresponds to a row of our lattice
 
 ### So now we need a map from polynomials to vectors f-->b_{f}
 ### Also, we shall need the inverse map. That is
 ### when we compute LLL basis, we shall need the correspoding polynomial
-######################### the map ###########################
+################### the map ###########################
     def map_g(f,n):
         j=0
         M=vector(ZZ,n)
@@ -61,9 +59,9 @@ def univ_cop(f,N,epsilon):
             M[i]=f.coefficients()[j]
             j=j+1
         return M 
-##############################################################
+#########################################################
     M=matrix(n,n,[(map_g(L1[i],n)) for i in range(n)])
     ML=M.LLL()
-########
+
     g=sum(ML[0][i]*x^i/X^i for i in range(n))    
     return g.roots(multiplicities=False)  
